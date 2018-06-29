@@ -87,14 +87,14 @@ class Config(object):
 
 			self.f_dim = 128
 			self.fc_dim = 1024
-			self.lamb = 1e-6
 
 			self.mem_size = 16384
+			self.key_dim = 512
 			self.choose_k = 256
 
-			self.key_dim = 512
 			self.beta1 = 0.
 			self.beta2 = 0.9
+			self.lamb = 1e-6
 
 		self.inception_frequency = 1000
 		self.sample_size = 100 * self.batch_size

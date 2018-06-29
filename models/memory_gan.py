@@ -18,6 +18,7 @@ class MemoryGAN(GAN):
 		super(MemoryGAN, self).__init__(config)
 
 		self.lamb = config.lamb # 1e-6
+		# memory: [16384, 512]
 		self.key_dim = config.key_dim # 512
 		self.mem_size = config.mem_size # 16384
 		self.mem = BaseMemory(self.key_dim, self.mem_size, choose_k=config.choose_k) #
@@ -40,6 +41,8 @@ class MemoryGAN(GAN):
 		q_r = self.discriminator(image, is_training) # bx512
 		d_out_r = self.mem.query(q_r, tf.ones(self.batch_size)) # 64
 
+		# sample batch_size number of memory slots according to h prob
+		# [b, 512]
 		self.q_sample = self.mem.sample_histogram(self.batch_size) # 64, 512
 		self.gen_image = self.generator( tf.concat([self.z, self.q_sample], axis=1), is_training) # [64, 16] cat [64, 512] => [64, 32, 32, 3]
 

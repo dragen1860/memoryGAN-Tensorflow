@@ -66,8 +66,7 @@ class GAN:
 			self.saver.restore(sess, os.path.join(checkpoint_dir, ckpt_name))
 			return True
 		else:
-			print
-			"Bad checkpoint: ", ckpt
+			print("Bad checkpoint: ", ckpt)
 			return False
 
 	def get_vars(self):

@@ -41,6 +41,7 @@ def base_g(model, z, is_training, reuse=False):
 				n_layer = 3
 				w = model.image_shape[0] // 2 ** (n_layer) # 4
 
+				# z: [b, 16+512]
 				h = fc(z, f_dim * w * w, act=tf.nn.elu, norm=ln) # [64, 2048=128*4*4]
 				h = tf.reshape(h, [-1, w, w, f_dim]) # [64, 4, 4, 128]
 
